@@ -19,7 +19,7 @@ var Enemy = function() {
     var lanes = [215,135,55];
     // Random lane
     var SetY = function () {
-        return this.lanes[Math.floor(Math.random()*lanes.length)];
+        return lanes[Math.floor(Math.random()*lanes.length)];
     };
     // Default x value
     this.x = -120;
@@ -37,11 +37,10 @@ Enemy.prototype.update = function(dt) {
     // speed varies
     this.x = this.x+(11*dt+this.speed*10);
     // if the enemy reaches the end, go back to the first place
-    // speed and lane change.
+    // change speed.
     if (this.x > 505){
         this.x = -120;
         this.speed = Math.random();
-        this.y = this.SetY();
     }
 
 };
@@ -87,7 +86,7 @@ player.checkCollisions = function () {
         // if any of the enemy is close to the character,
         // enemy list return to the default
         // reset the player position
-        if (((parseInt(item.y))==(parseInt(this.y)))&&((item.x+70 > this.x)&&(item.x-50<this.x))){
+        if (((parseInt(item.y))==(parseInt(this.y)))&&((item.x+30 > this.x)&&(item.x-20<this.x))){
             allEnemies = [new Enemy(),new Enemy(),new Enemy(),new Enemy(),new Enemy()];
             player.set();
         }
@@ -132,7 +131,7 @@ player.handleInput = function (key) {
         }
     }
     if (key == 'left'){
-        if (player.x==0 ){
+        if (player.x===0 ){
         }else {
             player.x = player.x - 101;
             player.update();
