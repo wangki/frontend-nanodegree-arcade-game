@@ -16,13 +16,15 @@ var Enemy = function() {
     this.sprite = sprites[Math.floor(Math.random()*sprites.length)];
     this.speed = Math.random();
     // Setting lanes for enemies
-    lanes = [215,135,55];
+    var lanes = [215,135,55];
     // Random lane
-    var item = lanes[Math.floor(Math.random()*lanes.length)];
+    var SetY = function () {
+        return this.lanes[Math.floor(Math.random()*lanes.length)];
+    };
     // Default x value
     this.x = -120;
     // Default y value
-    this.y = item;
+    this.y = SetY();
 
 };
 
@@ -39,8 +41,8 @@ Enemy.prototype.update = function(dt) {
     if (this.x > 505){
         this.x = -120;
         this.speed = Math.random();
-        this.y = lanes[Math.floor(Math.random()*lanes.length)];
-    };
+        this.y = this.SetY();
+    }
 
 };
 
@@ -81,7 +83,7 @@ player = new player();
 player.checkCollisions = function () {
     // loop through the enemy array
     for (var i=0; i<allEnemies.length; ++i) {
-        item = allEnemies[i];
+        var item = allEnemies[i];
         // if any of the enemy is close to the character,
         // enemy list return to the default
         // reset the player position
@@ -89,7 +91,7 @@ player.checkCollisions = function () {
             allEnemies = [new Enemy(),new Enemy(),new Enemy(),new Enemy(),new Enemy()];
             player.set();
         }
-    };
+    }
 
 };
 // while updating the player status, check collision.
@@ -107,8 +109,8 @@ player.handleInput = function (key) {
             player.y = player.y + 80;
             player.update();
 
-        };
-    };
+        }
+    }
     if (key == 'up'){
         player.y = player.y - 80;
         // when player reaches the end, add new enemy to the list
@@ -118,24 +120,24 @@ player.handleInput = function (key) {
         }else{
             player.update();
 
-        };
+        }
 
-    };
+    }
     if (key == 'right'){
 
         if (player.x==404 ){
         }else {
             player.x = player.x + 101;
             player.update();
-        };
-    };
+        }
+    }
     if (key == 'left'){
         if (player.x==0 ){
         }else {
             player.x = player.x - 101;
             player.update();
-        };
-    };
+        }
+    }
 };
 
 
