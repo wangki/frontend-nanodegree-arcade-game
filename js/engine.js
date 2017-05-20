@@ -160,8 +160,8 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
      function reset() {
-         player.x = 202;
-         player.y = 375;
+         this.x = 202;
+         this.y = 375;
 
      };
 

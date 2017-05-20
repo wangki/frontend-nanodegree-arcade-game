@@ -35,7 +35,8 @@ Enemy.prototype.update = function(dt) {
 // which will ensure the game runs at the same speed for
 // all computers.
     // speed varies
-    this.x = this.x+(11*dt+this.speed*10);
+    this.x = this.x + dt * this.speed * 550;
+
     // if the enemy reaches the end, go back to the first place
     // change speed.
     if (this.x > 505){
@@ -57,29 +58,13 @@ Enemy.prototype.render = function() {
  *  set player default functions
  */
 
-var player = function () {
+var Player = function () {
     this.sprite = 'images/char-boy.png';
 };
 // player is inherited from Enemy prototype
-player.prototype = Object.create(Enemy.prototype);
+Player.prototype = Object.create(Enemy.prototype);
 // check collision between enemy and character
-player.prototype.checkCollisions = function () {
-};
-// update player's status
-player.prototype.update = function(dt) {
-};
-
-// set player to default position
-player.prototype.set = function() {
-    player.x = 202;
-    player.y = 375;
-};
-// initiate player.
-player = new player();
-//player handle Input function.
-
-// override  collision check
-player.checkCollisions = function () {
+Player.prototype.checkCollisions = function () {
     // loop through the enemy array
     for (var i=0; i<allEnemies.length; ++i) {
         var item = allEnemies[i];
@@ -88,53 +73,64 @@ player.checkCollisions = function () {
         // reset the player position
         if (((parseInt(item.y))==(parseInt(this.y)))&&((item.x+30 > this.x)&&(item.x-20<this.x))){
             allEnemies = [new Enemy(),new Enemy(),new Enemy(),new Enemy(),new Enemy()];
-            player.set();
+            this.reset();
         }
     }
 
 };
-// while updating the player status, check collision.
-player.update = function(){
-    player.checkCollisions();
+// update player's status
+Player.prototype.update = function(dt) {
+    this.checkCollisions();
 };
 
+// set player to default position
+Player.prototype.reset = function() {
+    this.x = 202;
+    this.y = 375;
+};
+
+// initiate player.
+player = new Player();
+player.reset();
+//player handle Input function.
+
+
+// while updating the player status, check collision.
 // read keyboard input
-player.handleInput = function (key) {
+Player.prototype.handleInput = function (key) {
     // if a key is selected, move the character and update.
     // player cannot located outside of the map
     if (key == 'down'){
-        if (player.y ===375 ){
+        if (this.y ===375 ){
         }else {
-            player.y = player.y + 80;
-            player.update();
+            this.y = this.y + 80;
+            this.update();
 
         }
     }
     if (key == 'up'){
-        player.y = player.y - 80;
+        this.y = this.y - 80;
         // when player reaches the end, add new enemy to the list
-        if (player.y <= 0 ){
-            player.set();
+        if (this.y <= 0 ){
+            this.reset();
             allEnemies.push(new Enemy());
         }else{
-            player.update();
+            this.update();
 
         }
 
     }
     if (key == 'right'){
 
-        if (player.x==404 ){
-        }else {
-            player.x = player.x + 101;
-            player.update();
+        if (this.x!=404 ){
+            this.x = this.x + 101;
+            this.update();
         }
     }
     if (key == 'left'){
-        if (player.x===0 ){
-        }else {
-            player.x = player.x - 101;
-            player.update();
+        if (this.x!=0 ){
+            this.x = this.x - 101;
+            this.update();
         }
     }
 };
