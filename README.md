@@ -1,17 +1,28 @@
 frontend-nanodegree-arcade-game
 ===============================
 
-
-
-# Project
-
-# Intro
+# About the project
 
 This JavaScript project is building a frogger game. The purpose of this game is to reach the river. When you reach the river, You will be moved to the starting position and one more enemy will be added. So it means it will be harder and harder as you playing the game. When you collide to an enemy, your progress will be lost, and the game will restart. Let's see how many enemies you can defeat.
 
+
+# Starting the game
+
+You can run this game by opening up the `index.html`. I suggest you to open up the file with `chrome` browser. The game starts as soon as the browser finish loading `index.html` 
+ 
+## Interface
+
+You are character is in the bottom of the screen. He is on the grass. You can move your character with the keyboard. 
+ - Up arrow key - move your character to one block up
+ - Down arrow key - move your character to one block down
+ - Right arrow key - move your character to one block right
+ - Left arrow key - move your character to one block left
+
+
+
 ---
 
-# Starting with
+# Developer guide
 
 First, I suggest you to read the code. There are three JavasCript code in the file, 
 
